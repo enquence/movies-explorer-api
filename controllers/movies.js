@@ -10,7 +10,7 @@ module.exports.getMovies = (req, res, next) => {
 };
 
 module.exports.saveMovie = (req, res, next) => {
-  movieModel.create(req.body)
+  movieModel.create({ owner: req.user, ...req.body })
     .then((movie) => res.status(StatusCodes.CREATED).send(movie))
     .catch(next);
 };
