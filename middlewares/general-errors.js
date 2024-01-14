@@ -16,6 +16,7 @@ module.exports = (err, req, res, next) => {
   if (err.code === 11000) {
     return res.status(StatusCodes.CONFLICT).send({ message: err.message });
   }
-  res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ message: requestMessages.SERVER_ERROR });
+  res.status(StatusCodes.INTERNAL_SERVER_ERROR)
+    .send({ message: requestMessages.SERVER_ERROR });
   return next();
 };

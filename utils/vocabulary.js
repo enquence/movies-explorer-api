@@ -15,9 +15,9 @@ const requestMessages = {
 };
 
 const validateMassages = {
-  fieldRequired: (fieldName) => `Поле "${fieldName}" должно быть заполнено`,
-  maxFieldLength: (length) => `Максимальная длина поля "name" - ${length}`,
-  minFieldLength: (length) => `Минимальная длина поля "name" - ${length}`,
+  maxFieldLength: (length) => `Максимальная длина поля - ${length}`,
+  minFieldLength: (length) => `Минимальная длина поля - ${length}`,
+  FIELD_REQUIRED: 'Поле должно быть заполнено',
   BAD_URL: 'Некорректный адрес ссылки',
   BAD_EMAIL: 'Некорректный адрес почты',
   DUPLICATE_EMAIL: 'Адрес почты уже зарегистрирован',

@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 require('dotenv').config();
 const helmet = require('helmet');
-const { errors: requestErrors } = require('celebrate');
+const { errors } = require('celebrate');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const { rateLimit } = require('express-rate-limit');
@@ -40,7 +40,7 @@ app.use(require('./routes'));
 
 // errors
 app.use(errorLogger);
-app.use(requestErrors());
+app.use(errors());
 app.use(generalErrors);
 
 app.listen(PORT);

@@ -5,25 +5,32 @@ const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{2,}$/;
 const urlPattern = /[(http(s)?)://(www.)?a-zA-Z0-9@:%._+~#=]{2,}\.[a-z]{2,6}\b([-a-zA-Z0-9-._~:/?#[\]@!$&'()*+,;=]*#?$)/;
 
 const requestRules = {
-  userAuthBody: {
-    body: Joi.object().keys({
+  userSignUpBody: {
+    body: Joi.object({
+      email: Joi.string().pattern(emailPattern).required(),
+      password: Joi.string().min(2).pattern(passwordPattern).required(),
+      name: Joi.string().required(),
+    }),
+  },
+  userSignInBody: {
+    body: Joi.object({
       email: Joi.string().required().pattern(emailPattern),
       password: Joi.string().required().pattern(passwordPattern),
     }),
   },
   userUpdateBody: {
-    body: Joi.object().keys({
+    body: Joi.object({
       email: Joi.string().pattern(emailPattern),
       name: Joi.string(),
     }),
   },
   movieParamsId: {
-    params: Joi.object().keys({
+    params: Joi.object({
       movieId: Joi.string().required().hex().length(24),
     }),
   },
   movieBodyFields: {
-    body: Joi.object().keys({
+    body: Joi.object({
       country: Joi.string().required(),
       director: Joi.string().required(),
       duration: Joi.number().required(),

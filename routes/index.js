@@ -6,8 +6,8 @@ const { NotFoundError } = require('../utils/errors');
 const { requestRules } = require('../utils/req-rules');
 const { requestMessages } = require('../utils/vocabulary');
 
-router.use('/signin', celebrate(requestRules.userAuthBody), login);
-router.use('/signup', celebrate(requestRules.userAuthBody), createUser);
+router.post('/signin', celebrate(requestRules.userSignInBody), login);
+router.post('/signup', celebrate(requestRules.userSignUpBody), createUser);
 
 router.use('/users', auth, require('./users'));
 router.use('/movies', auth, require('./movies'));
