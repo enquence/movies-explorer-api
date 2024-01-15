@@ -13,6 +13,6 @@ router.post('/signout', auth, logout);
 router.use('/users', auth, require('./users'));
 router.use('/movies', auth, require('./movies'));
 
-router.use('*', (_, __, next) => next(new NotFoundError(requestMessages.NONEXISTEND_ENDPOINT)));
+router.use('*', auth, (_, __, next) => next(new NotFoundError(requestMessages.NONEXISTEND_ENDPOINT)));
 
 module.exports = router;

@@ -3,7 +3,8 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const userModel = require('../models/user');
 const { NotFoundError, BadRequestError } = require('../utils/errors');
-const { requestMessages, secretKeyModeDependent } = require('../utils/vocabulary');
+const { requestMessages } = require('../utils/vocabulary');
+const { secretKeyModeDependent } = require('../utils/constants');
 
 module.exports.createUser = (req, res, next) => {
   bcrypt.hash(req.body.password, 10)
