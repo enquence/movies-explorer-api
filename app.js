@@ -9,15 +9,11 @@ const { rateLimit } = require('express-rate-limit');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const cors = require('./middlewares/cors');
 const generalErrors = require('./middlewares/general-errors');
+const { dbConnection, rateLimitOptions } = require('./utils/constants');
 
-const {
-  PORT = 3000,
-  DB_IP = '127.0.0.1',
-  DB_PORT = 27017,
-  DB_NAME = 'bitfilmsdb',
-} = process.env;
+const { PORT = 3000 } = process.env;
 
-mongoose.connect(`mongodb://${DB_IP}:${DB_PORT}/${DB_NAME}`);
+await mongoose.connect(dbConnection);
 
 const app = express();
 
@@ -28,12 +24,7 @@ app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(rateLimit({
-  windowMs: 15 * 60 * 1000,
-  limit: 100,
-  standardHeaders: 'draft-7',
-  legacyHeaders: false,
-}));
+app.use(rateLimit(rateLimitOptions));
 
 // routes
 app.use(require('./routes'));

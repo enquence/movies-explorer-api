@@ -1,7 +1,8 @@
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const { AuthError } = require('../utils/errors');
-const { requestMessages, secretKeyModeDependent } = require('../utils/vocabulary');
+const { requestMessages } = require('../utils/vocabulary');
+const { secretKeyModeDependent } = require('../utils/constants');
 
 module.exports = (req, res, next) => {
   if (!req.cookies.jwt) throw new AuthError(requestMessages.AUTH_REQUIRED);
